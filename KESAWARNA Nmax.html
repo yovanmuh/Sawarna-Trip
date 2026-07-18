@@ -62,172 +62,24 @@
             margin-bottom: 1.5rem;
         }
 
-        /* --- ANIMASI MOTOR NMAX UPGRADE --- */
+        /* --- WADAH FOTO KEBERSAMAAN --- */
         .bike-animation-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 80px;
-            margin-top: 1.5rem;
+            height: 110px;
+            margin-top: 1rem;
             position: relative;
         }
 
-        .nmax-bike {
-            position: relative;
-            width: 120px;
-            height: 70px;
-            animation: rideEffect 2s infinite ease-in-out;
-        }
-
-        /* Bodi NMAX Merah Matte Modern */
-        .nmax-body {
-            position: absolute;
-            bottom: 12px;
-            left: 15px;
-            width: 85px;
-            height: 36px;
-            background: linear-gradient(145deg, #dc2626, #991b1b);
-            border-radius: 25px 45px 20px 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            z-index: 3;
-        }
-
-        /* Visor & Stang NMAX Tinggi */
-        .nmax-front {
-            position: absolute;
-            top: -15px;
-            right: -8px;
-            width: 28px;
-            height: 35px;
-            background: linear-gradient(135deg, #dc2626, #b91c1c);
-            border-radius: 0 25px 5px 0;
-            transform: skewX(-18deg);
-        }
-        
-        .nmax-visor {
-            position: absolute;
-            top: -10px;
-            right: 4px;
-            width: 10px;
-            height: 20px;
-            background-color: rgba(15, 23, 42, 0.85);
-            border-radius: 0 8px 0 0;
-        }
-
-        /* Lampu Depan Menyala (Efek Nyata) */
-        .nmax-front::after {
-            content: '';
-            position: absolute;
-            bottom: 5px;
-            right: -4px;
-            width: 8px;
-            height: 8px;
-            background-color: #fde047;
+        .couple-photo {
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
             border-radius: 50%;
-            box-shadow: 0 0 12px #fde047;
-        }
-
-        /* Roda Bergaya Velg Racing */
-        .wheel {
-            position: absolute;
-            bottom: 0px;
-            width: 26px;
-            height: 26px;
-            background: radial-gradient(circle, #475569 30%, #1e293b 70%);
-            border: 4px dashed #cbd5e1;
-            border-radius: 50%;
-            animation: spin 0.4s infinite linear;
-            z-index: 2;
-        }
-        .wheel-left { left: 8px; }
-        .wheel-right { right: 8px; }
-
-        /* Pengendara Cowok (Jaket & Posisi Duduk Ergonomis) */
-        .rider-boy {
-            position: absolute;
-            top: -26px;
-            right: 28px;
-            width: 24px;
-            height: 42px;
-            background-color: #1e3a8a; 
-            border-radius: 12px 14px 5px 5px;
-            z-index: 4;
-            transform: rotate(5deg);
-        }
-        
-        .helmet-boy {
-            position: absolute;
-            top: -20px;
-            left: 4px;
-            width: 20px;
-            height: 20px;
-            background: linear-gradient(135deg, #334155, #0f172a);
-            border-radius: 50%;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-            z-index: 5;
-        }
-
-        /* Kaca Helm / Visor Cowok */
-        .helmet-boy::after {
-            content: '';
-            position: absolute;
-            top: 4px;
-            right: -2px;
-            width: 6px;
-            height: 8px;
-            background-color: #38bdf8;
-            border-radius: 0 3px 3px 0;
-        }
-
-        /* Penumpang Cewek (Memeluk/Bersandar Lembut) */
-        .rider-girl {
-            position: absolute;
-            top: -22px;
-            left: 32px;
-            width: 22px;
-            height: 38px;
-            background-color: #ec4899; 
-            border-radius: 12px 12px 5px 5px;
-            z-index: 3;
-            transform: rotate(-3deg);
-        }
-        
-        .helmet-girl {
-            position: absolute;
-            top: -16px;
-            left: 2px;
-            width: 19px;
-            height: 19px;
-            background: linear-gradient(135deg, #ffffff, #e2e8f0);
-            border-radius: 50%;
-            border: 1px solid #cbd5e1;
-            z-index: 5;
-        }
-
-        /* Knalpot Racing NMAX */
-        .exhaust {
-            position: absolute;
-            bottom: 8px;
-            left: -8px;
-            width: 32px;
-            height: 9px;
-            background: linear-gradient(to right, #334155, #64748b);
-            border-radius: 4px;
-            transform: rotate(-12deg);
-            z-index: 4;
-        }
-
-        /* Asap Knalpot Tipis */
-        .exhaust::before {
-            content: '';
-            position: absolute;
-            left: -10px;
-            top: 2px;
-            width: 6px;
-            height: 4px;
-            background-color: rgba(255,255,255,0.2);
-            border-radius: 50%;
-            box-shadow: -5px 0 5px rgba(255,255,255,0.1);
+            border: 3px solid #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            animation: floatEffect 3s infinite ease-in-out;
         }
 
         /* --- CONTAINER UTAMA --- */
@@ -396,13 +248,9 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes spin {
-            100% { transform: rotate(-360deg); }
-        }
-
-        @keyframes rideEffect {
-            0%, 100% { transform: translateY(0) translateX(-8px); }
-            50% { transform: translateY(-4px) translateX(8px); }
+        @keyframes floatEffect {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-6px) scale(1.03); }
         }
 
         /* --- RESPONSIF LAYAR --- */
@@ -418,27 +266,14 @@
 </head>
 <body>
 
-    <!-- Header Banner dengan Animasi NMAX Upgrade -->
+    <!-- Header Banner dengan Gambar Pilihan Sendiri -->
     <header>
         <h1>Itinerary Ke Sawarna</h1>
         <p>Gunakan halaman ini sebagai panduan interaktif selama perjalanan motor Anda</p>
         
-        <!-- Wadah Animasi Motor -->
+        <!-- Wadah Foto Profil -->
         <div class="bike-animation-container">
-            <div class="nmax-bike">
-                <div class="helmet-girl"></div>
-                <div class="rider-girl"></div>
-                <div class="helmet-boy"></div>
-                <div class="rider-boy"></div>
-                <div class="nmax-body">
-                    <div class="nmax-front">
-                        <div class="nmax-visor"></div>
-                    </div>
-                    <div class="exhaust"></div>
-                </div>
-                <div class="wheel wheel-left"></div>
-                <div class="wheel wheel-right"></div>
-            </div>
+            <img src="motor.png" alt="Foto Tanjung Layar" class="couple-photo">
         </div>
     </header>
 
@@ -478,7 +313,7 @@
                     <div class="timeline-node"></div>
                     <div class="time-badge">12.30 – 13.00</div>
                     <div class="activity-title">Menuju Penginapan Pertama</div>
-                    <div class="activity-desc">(Area Ciantir/Tanjung Layar), check-in, mandi, dan istirahat.</div>
+                    <div class="activity-desc">(Area Ciantir/Tanjung Layar), check-in, mandi, and istirahat.</div>
                 </div>
 
                 <div class="timeline-item" onclick="toggleTask(this)">
