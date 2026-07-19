@@ -467,9 +467,31 @@
 
     <!-- --- JAVASCRIPT INTERNAL --- -->
     <script>
-        function toggleTask(element) {
-            element.classList.toggle('done');
-        }
+       // Fungsi buat ngasih ceklis dan langsung disimpan di memori otak website
+function toggleTask(element) {
+    element.classList.toggle('done');
+    
+    // Simpan status semua ceklis ke memori laptop
+    const tasks = document.querySelectorAll('.timeline-item');
+    const taskStates = [];
+    tasks.forEach((task, index) => {
+        taskStates.push(task.classList.contains('done'));
+    });
+    localStorage.setItem('sawarna_tasks', JSON.stringify(taskStates));
+}
+
+// Fungsi otomatis pas website dibuka, langsung nginget ceklis yang kemarin
+document.addEventListener("DOMContentLoaded", function() {
+    const savedStates = JSON.parse(localStorage.getItem('sawarna_tasks'));
+    if (savedStates) {
+        const tasks = document.querySelectorAll('.timeline-item');
+        tasks.forEach((task, index) => {
+            if (savedStates[index]) {
+                task.classList.add('done');
+            }
+        });
+    }
+});
     </script>
 </body>
 </html>
