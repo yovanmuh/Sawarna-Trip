@@ -81,6 +81,76 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             animation: floatEffect 3s infinite ease-in-out;
         }
+        <!-- ⏳ COUNTDOWN TIMER KE SAWARNA -->
+<div style="
+    text-align: center; 
+    margin: 25px auto; 
+    max-width: 480px; 
+    padding: 20px; 
+    background: linear-gradient(135deg, #ffffff, #fff5f8);
+    border-radius: 20px; 
+    border: 2px solid #ffe1eb;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+">
+    <p style="font-size: 14px; color: #ff6b81; font-weight: bold; margin: 0 0 12px 0;">
+        ⏰ Hitung Mundur Menuju Sawarna Trip 🛵💨
+    </p>
+
+    <!-- Angka Timer -->
+    <div id="countdown-box" style="display: flex; justify-content: center; gap: 12px;">
+        <div style="background: #ff6b81; color: white; padding: 10px 14px; border-radius: 12px; min-width: 55px;">
+            <span id="cd-days" style="font-size: 20px; font-weight: bold; display: block;">00</span>
+            <span style="font-size: 10px; text-transform: uppercase;">Hari</span>
+        </div>
+        <div style="background: #ff6b81; color: white; padding: 10px 14px; border-radius: 12px; min-width: 55px;">
+            <span id="cd-hours" style="font-size: 20px; font-weight: bold; display: block;">00</span>
+            <span style="font-size: 10px; text-transform: uppercase;">Jam</span>
+        </div>
+        <div style="background: #ff6b81; color: white; padding: 10px 14px; border-radius: 12px; min-width: 55px;">
+            <span id="cd-minutes" style="font-size: 20px; font-weight: bold; display: block;">00</span>
+            <span style="font-size: 10px; text-transform: uppercase;">Menit</span>
+        </div>
+        <div style="background: #ff6b81; color: white; padding: 10px 14px; border-radius: 12px; min-width: 55px;">
+            <span id="cd-seconds" style="font-size: 20px; font-weight: bold; display: block;">00</span>
+            <span style="font-size: 10px; text-transform: uppercase;">Detik</span>
+        </div>
+    </div>
+
+    <!-- Pesan Kecil -->
+    <p id="cd-message" style="font-size: 12px; color: #777; margin: 12px 0 0 0; font-style: italic;">
+        Gak sabar mau jalan-jalan berdua sama kamu! 💖
+    </p>
+</div>
+
+<!-- SCRIPT PENGHITUNG WAKTU -->
+<script>
+    // ⚠️ ATUR TANGGAL KEBERANGKATAN DI SINI (Tahun, Bulan-1, Tanggal, Jam, Menit)
+    // Catatan: Bulan Januari = 0, Februari = 1, Maret = 2, dst (Agustus = 7, September = 8, dst).
+    // Contoh di bawah ini di-set untuk tanggal 15 Agustus 2026 jam 05:00 Pagi:
+    const targetDate = new Date(2026, 7, 15, 5, 0, 0).getTime();
+
+    const updateCountdown = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance < 0) {
+            clearInterval(updateCountdown);
+            document.getElementById("countdown-box").innerHTML = "<h4 style='color:#ff6b81; margin:10px 0;'>🎉 HARI H TRIP KITA TELAH TIBA! 🥳</h4>";
+            document.getElementById("cd-message").innerHTML = "Hati-hati di jalan ya sayang, selamat menikmati perjalanan! 🏍️💨✨";
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("cd-days").innerText = days < 10 ? "0" + days : days;
+        document.getElementById("cd-hours").innerText = hours < 10 ? "0" + hours : hours;
+        document.getElementById("cd-minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+        document.getElementById("cd-seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+    }, 1000);
+</script>
 
         /* --- CONTAINER UTAMA --- */
         main {
