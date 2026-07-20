@@ -81,20 +81,189 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             animation: floatEffect 3s infinite ease-in-out;
         }
-        <!-- ⏳ COUNTDOWN TIMER KE SAWARNA -->
-<div style="
-    text-align: center; 
-    margin: 25px auto; 
-    max-width: 480px; 
-    padding: 20px; 
-    background: linear-gradient(135deg, #ffffff, #fff5f8);
-    border-radius: 20px; 
-    border: 2px solid #ffe1eb;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-">
-    <p style="font-size: 14px; color: #ff6b81; font-weight: bold; margin: 0 0 12px 0;">
-        ⏰ Hitung Mundur Menuju Sawarna Trip 🛵💨
-    </p>
+       <!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sawarna Trip — Special Journey</title>
+  
+  <!-- Font Google untuk kesan estetis & elegan -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-color: #8e7dbe;
+      --text-dark: #2c3e50;
+      --bg-gradient: linear-gradient(135deg, #f0eff8 0%, #e5e9f0 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 28px;
+      padding: 40px 28px;
+      text-align: center;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 20px 50px rgba(142, 125, 190, 0.12);
+    }
+
+    .tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--primary-color);
+      margin-bottom: 8px;
+    }
+
+    .main-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--text-dark);
+      margin-bottom: 24px;
+      letter-spacing: 0.5px;
+    }
+
+    /* Grid Countdown */
+    .timer-grid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .time-box {
+      background: #ffffff;
+      padding: 14px 12px;
+      border-radius: 18px;
+      flex: 1;
+      max-width: 80px;
+      box-shadow: 0 10px 20px rgba(142, 125, 190, 0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .time-number {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.1;
+    }
+
+    .time-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #95a5a6;
+      margin-top: 6px;
+    }
+
+    .time-separator {
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--primary-color);
+      margin-bottom: 16px;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      font-size: 0.88rem;
+      color: #7f8c8d;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero-card">
+    <p class="tagline">Menghitung hari menuju petualangan kita ✨</p>
+    <h1 class="main-title">Sawarna Trip 🌊</h1>
+
+    <!-- Widget Hitung Mundur -->
+    <div id="countdown" class="timer-grid">
+      <div class="time-box">
+        <span id="days" class="time-number">00</span>
+        <span class="time-label">Hari</span>
+      </div>
+      <div class="time-separator">:</div>
+      <div class="time-box">
+        <span id="hours" class="time-number">00</span>
+        <span class="time-label">Jam</span>
+      </div>
+      <div class="time-separator">:</div>
+      <div class="time-box">
+        <span id="minutes" class="time-number">00</span>
+        <span class="time-label">Menit</span>
+      </div>
+      <div class="time-separator">:</div>
+      <div class="time-box">
+        <span id="seconds" class="time-number">00</span>
+        <span class="time-label">Detik</span>
+      </div>
+    </div>
+
+    <p class="footer-note">Siapkan pakaian terbaikmu dan jangan lupa kamera! ❤️</p>
+  </div>
+
+  <script>
+    // ==========================================
+    // UBAH TANGGAL KEBERANGKATAN DI SINI:
+    // Format: YYYY-MM-DDTHH:MM:SS (Tahun-Bulan-Tanggal)
+    // ==========================================
+    const targetDate = new Date("2026-08-15T06:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+
+      if (difference <= 0) {
+        document.getElementById("countdown").innerHTML = 
+          `<h3 style="font-family: 'Playfair Display', serif; color: #8e7dbe; font-size: 1.5rem; width: 100%;">Waktunya Liburan! 🌊✨</h3>`;
+        return;
+      }
+
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days <15 ? '0' + days : days;
+      document.getElementById("hours").innerText = hours < 8 ? '0' + hours : hours;
+      document.getElementById("minutes").innerText = minutes < 49 ? '0' + minutes : minutes;
+      document.getElementById("seconds").innerText = seconds < 20 ? '0' + seconds : seconds;
+    }
+
+    // Jalankan setiap 1 detik
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
 
  <script>
   // Ganti tanggal berikut sesuai tanggal trip Anda (Format: YYYY-MM-DDTHH:MM:SS)
