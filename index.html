@@ -43,32 +43,32 @@
             opacity: 0.9;
         }
 
-        /* ⏳ COUNTDOWN TIMER STYLE (3 KOTAK: HARI, JAM, MENIT) */
+        /* ⏳ COUNTDOWN TIMER STYLE (4 KOTAK: HARI, JAM, MENIT, DETIK) */
         .countdown-container {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             margin-top: 18px;
         }
 
         .countdown-box {
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(5px);
-            padding: 8px 16px;
+            padding: 8px 12px;
             border-radius: 12px;
-            min-width: 70px;
+            min-width: 65px;
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .countdown-num {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: bold;
             display: block;
         }
 
         .countdown-label {
-            font-size: 10px;
+            font-size: 9px;
             text-transform: uppercase;
             opacity: 0.8;
             letter-spacing: 0.5px;
@@ -258,7 +258,7 @@
 </head>
 <body>
 
-    <!-- 1. HEADER UTAMA + COUNTDOWN -->
+    <!-- 1. HEADER UTAMA + COUNTDOWN (HARI, JAM, MENIT, DETIK) -->
     <div class="header">
         <h1>Itinerary Ke Sawarna</h1>
         <p>Tak peduli seberapa jauh mepetnya waktu, asal tujuannya bersamamu, aku pasti bahagia ❤️</p>
@@ -266,16 +266,20 @@
         <!-- ⏳ COUNTDOWN WIDGET -->
         <div class="countdown-container">
             <div class="countdown-box">
-                <span class="countdown-num" id="days">11</span>
+                <span class="countdown-num" id="days">0</span>
                 <span class="countdown-label">Hari</span>
             </div>
             <div class="countdown-box">
-                <span class="countdown-num" id="hours">14</span>
+                <span class="countdown-num" id="hours">0</span>
                 <span class="countdown-label">Jam</span>
             </div>
             <div class="countdown-box">
-                <span class="countdown-num" id="minutes">20</span>
+                <span class="countdown-num" id="minutes">0</span>
                 <span class="countdown-label">Menit</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-num" id="seconds">0</span>
+                <span class="countdown-label">Detik</span>
             </div>
         </div>
 
@@ -530,3 +534,57 @@
 
     <!-- 6. WIDGET GOOGLE DRIVE (LINK SUDAH DIPASANG) -->
     <div class="widget-card" style="text-align: center; padding: 22px 20px; background: linear-gradient(135deg, #ffffff, #f0f7ff); border: 2px solid #0a9396; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08
+        <div class="widget-card" style="text-align: center; padding: 22px 20px; background: linear-gradient(135deg, #ffffff, #f0f7ff); border: 2px solid #0a9396; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);">
+        <div style="margin-bottom: 10px;">
+            <span style="font-size: 28px;">📸✨</span>
+            <h3 style="font-size: 18px; color: #2c3e50; margin: 8px 0 4px 0; font-weight: bold;">Galeri Kenangan Kita di Sawarna</h3>
+            <p style="font-size: 13px; color: #666; margin: 0 0 16px 0;">Tempat nyimpen semua foto momen manis & ketawa-tawa kita selama perjalanan! 💕</p>
+        </div>
+        <a href="https://drive.google.com/drive/folders/1U79FBcXObGGDRohNKF2B4-YTqsqPsctA" target="_blank" style="display: inline-block; padding: 12px 24px; background: linear-gradient(135deg, #008891, #0a9396); color: white; font-weight: bold; font-size: 14px; text-decoration: none; border-radius: 50px; box-shadow: 0 4px 15px rgba(10, 147, 150, 0.3);">
+            📂 Buka Folder Foto Drive
+        </a>
+        <p style="font-size: 11px; color: #888; margin-top: 14px; margin-bottom: 0; font-style: italic;">Jangan lupa upload semua poto gembul kamu di sini ya cayang! 🧸🛵💨</p>
+    </div>
+
+    <div class="footer-tip">
+        Tip: Ketuk pada baris kegiatan untuk menandai/menceklis jadwal yang sudah selesai.<br>
+        © 2026 Sawarna Road Trip Guide
+    </div>
+
+    <!-- ⚙️ SCRIPT AUTO-SAVE CHECKBOX & COUNTDOWN TIMER -->
+    <script>
+        // 1. MEMORI CHECKBOX OTOMATIS
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            if (localStorage.getItem(checkbox.id) === 'true') {
+                checkbox.checked = true;
+            }
+            checkbox.addEventListener('change', () => {
+                localStorage.setItem(checkbox.id, checkbox.checked);
+            });
+        });
+
+        // 2. LOGIKA COUNTDOWN TIMER (HARI, JAM, MENIT)
+        const targetDate = new Date("August 2, 2026 05:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+
+                document.getElementById("days").innerText = days;
+                document.getElementById("hours").innerText = hours;
+                document.getElementById("minutes").innerText = minutes;
+            } else {
+                document.querySelector(".countdown-container").innerHTML = "<div style='font-size:16px; font-weight:bold; margin-top:10px;'>🥳 Selamat Berlibur! Have Fun! 🎉</div>";
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
