@@ -43,7 +43,7 @@
             opacity: 0.9;
         }
 
-        /* ⏳ COUNTDOWN TIMER STYLE */
+        /* ⏳ COUNTDOWN TIMER STYLE (3 KOTAK: HARI, JAM, MENIT) */
         .countdown-container {
             display: flex;
             justify-content: center;
@@ -54,15 +54,15 @@
         .countdown-box {
             background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(5px);
-            padding: 8px 12px;
+            padding: 8px 16px;
             border-radius: 12px;
-            min-width: 60px;
+            min-width: 70px;
             text-align: center;
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .countdown-num {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: bold;
             display: block;
         }
@@ -274,13 +274,13 @@
                 <span class="countdown-label">Jam</span>
             </div>
             <div class="countdown-box">
-                <span class="countdown-num" id="minutes">24</span>
+                <span class="countdown-num" id="minutes">20</span>
                 <span class="countdown-label">Menit</span>
             </div>
         </div>
 
         <div class="bike-animation-container">
-            <img src="motor.png" class="couple-photo" alt="Foto Kebersamaan"
+            <img src="motor.png" class="couple-photo" alt="Foto Kebersamaan" onerror="this.src='https://via.placeholder.com/160?text=Couple+Photo'">
         </div>
     </div>
 
@@ -353,7 +353,7 @@
                 <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">12.30 - 13.00</span>
-                    <div class="title">Menuju Sawarna Resort</div>
+                    <div class="title">Menuju Penginapan Pertama</div>
                     <div class="desc">Area Ciantir/Tanjung Layar: Check-in, mandi, dan istirahat.</div>
                 </div>
             </label>
@@ -528,5 +528,5 @@
         </div>
     </div>
 
-    <!-- 6. WIDGET GOOGLE DRIVE -->
-    <div class="widget-card" style="text-align: center; padding: 2
+    <!-- 6. WIDGET GOOGLE DRIVE (LINK SUDAH DIPASANG) -->
+    <div class="widget-card" style="text-align: center; padding: 22px 20px; background: linear-gradient(135deg, #ffffff, #f0f7ff); border: 2px solid #0a9396; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08
