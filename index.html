@@ -115,14 +115,13 @@
             padding: 20px;
         }
 
+        /* 🔘 ITEM CHECKBOX MODERN */
         .item {
             display: flex;
             align-items: flex-start;
             margin-bottom: 18px;
             cursor: pointer;
-            transition: all 0.2s ease;
             position: relative;
-            padding-left: 30px;
             user-select: none;
         }
 
@@ -130,32 +129,57 @@
             margin-bottom: 0;
         }
 
-        .checkbox-custom {
+        /* Checkbox asli disembunyikan tapi tetap aktif */
+        .item input[type="checkbox"] {
             position: absolute;
-            left: 0;
-            top: 2px;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        /* Tampilan lingkaran custom */
+        .checkmark {
+            height: 22px;
+            width: 22px;
+            background-color: #fff;
             border: 2px solid #ccc;
-            background: white;
-            transition: all 0.2s ease;
+            border-radius: 50%;
+            margin-right: 12px;
+            margin-top: 2px;
+            flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.2s ease;
         }
 
-        /* TAMPILAN SAAT DICENTANG (COMPLETED) */
-        .item.completed .checkbox-custom {
-            background: #2a9d8f;
+        /* Efek saat dicentang */
+        .item input:checked ~ .checkmark {
+            background-color: #2a9d8f;
             border-color: #2a9d8f;
         }
 
-        .item.completed .checkbox-custom::after {
-            content: '✓';
-            color: white;
-            font-size: 12px;
-            font-weight: bold;
+        .checkmark:after {
+            content: "";
+            display: none;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            margin-bottom: 2px;
+        }
+
+        .item input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        /* Teks tercoret saat dicentang */
+        .item input:checked ~ .item-content .title,
+        .item input:checked ~ .item-content .desc {
+            text-decoration: line-through;
+            opacity: 0.5;
         }
 
         .item-content {
@@ -178,18 +202,14 @@
             font-weight: bold;
             color: #333;
             margin-bottom: 2px;
+            transition: all 0.2s ease;
         }
 
         .desc {
             font-size: 12px;
             color: #666;
             line-height: 1.4;
-        }
-
-        .item.completed .title,
-        .item.completed .desc {
-            text-decoration: line-through;
-            opacity: 0.5;
+            transition: all 0.2s ease;
         }
 
         .note-box {
@@ -258,54 +278,60 @@
             <span class="badge">EKSPLORASI</span>
         </div>
         <div class="timeline">
-            <div class="item" onclick="toggleItem(this, 'item1')">
-                <div class="checkbox-custom"></div>
+            <label class="item">
+                <input type="checkbox" id="item1">
+                <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">05.00 - 09.30</span>
                     <div class="title">Berangkat Motoran</div>
                     <div class="desc">Jalur Serang - Pandeglang - Gunung Kencana - Malingping - Bayah - Sawarna.</div>
                 </div>
-            </div>
-            <div class="item" onclick="toggleItem(this, 'item2')">
-                <div class="checkbox-custom"></div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item2">
+                <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">09.30 - 11.30</span>
                     <div class="title">Masuk & Wisata di Karang Bokor Sawarna</div>
                     <div class="desc">Foto-foto di jembatan tebing dan tebing karang indah.</div>
                 </div>
-            </div>
-            <div class="item" onclick="toggleItem(this, 'item3')">
-                <div class="checkbox-custom"></div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item3">
+                <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">11.30 - 12.30</span>
                     <div class="title">Makan Siang</div>
                     <div class="desc">Makan di area luar/sekitar Sawarna.</div>
                 </div>
-            </div>
-            <div class="item" onclick="toggleItem(this, 'item4')">
-                <div class="checkbox-custom"></div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item4">
+                <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">12.30 - 13.00</span>
                     <div class="title">Menuju Penginapan Pertama</div>
                     <div class="desc">Area Ciantir/Tanjung Layar: Check-in, mandi, dan istirahat.</div>
                 </div>
-            </div>
-            <div class="item" onclick="toggleItem(this, 'item5')">
-                <div class="checkbox-custom"></div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item5">
+                <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">15.30 - 18.00</span>
                     <div class="title">Ke Pantai Tanjung Layar</div>
                     <div class="desc">Berjalan kaki/motor ke area karang saat air surut untuk foto berdua & menikmati sunset.</div>
                 </div>
-            </div>
-            <div class="item" onclick="toggleItem(this, 'item6')">
-                <div class="checkbox-custom"></div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item6">
+                <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">19.00 - Selesai</span>
                     <div class="title">Makan Malam & Istirahat Total</div>
                     <div class="desc">Makan di sekitar penginapan lalu istirahat.</div>
                 </div>
-            </div>
+            </label>
         </div>
     </div>
 
@@ -316,70 +342,78 @@
             <span class="badge">PINDAH SPOT</span>
         </div>
         <div class="timeline">
-            <div class="item" onclick="toggleItem(this, 'item7')">
-                <div class="checkbox-custom"></div>
+            <label class="item">
+                <input type="checkbox" id="item7">
+                <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">05.30 - 06.00</span>
                     <div class="title">Bangun Pagi dan Bersiap</div>
                     <div class="desc">Persiapan agenda pagi hari.</div>
                 </div>
-            </div>
-            <div class="item" onclick="toggleItem(this, 'item8')">
-                <div class="checkbox-custom"></div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item8">
+                <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">06.00 - 08.00</span>
                     <div class="title">Berkendara ke Pantai Karang Taraje</div>
                     <div class="desc">Melihat ombak air terjun karang saat pagi.</div>
                 </div>
-            </div>
-            <div class="item" onclick="toggleItem(this, 'item9')">
-                <div class="checkbox-custom"></div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item9">
+                <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">08.00 - 09.30</span>
                     <div class="title">"Slow Morning" & Ngopi</div>
                     <div class="desc">Menikmati pagi yang santai di teras penginapan pertama sembari menyeduh kopi/teh bawaan sendiri dan menyortir foto-foto kemarin.</div>
                 </div>
-            </div>
-            <div class="item" onclick="toggleItem(this, 'item10')">
-                <div class="checkbox-custom"></div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item10">
+                <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">10.00 - 11.30</span>
                     <div class="title">Kembali ke Penginapan Pertama</div>
                     <div class="desc">Bersiap, packing, dan check-out.</div>
                 </div>
-            </div>
-            <div class="item" onclick="toggleItem(this, 'item11')">
-                <div class="checkbox-custom"></div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item11">
+                <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">11.30 - 12.30</span>
                     <div class="title">Perjalanan dan Check-in</div>
                     <div class="desc">Menuju ke Cabin Legon Pari.</div>
                 </div>
-            </div>
-            <div class="item" onclick="toggleItem(this, 'item12')">
-                <div class="checkbox-custom"></div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item12">
+                <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">12.30 - 15.30</span>
                     <div class="title">Makan Siang dan Istirahat Siang</div>
                     <div class="desc">Di area Legon Pari.</div>
                 </div>
-            </div>
-            <div class="item" onclick="toggleItem(this, 'item13')">
-                <div class="checkbox-custom"></div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item13">
+                <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">16.00 - 18.00</span>
                     <div class="title">Menuju Pantai Ciantir</div>
                     <div class="desc">Untuk menikmati sunset terakhir di hamparan pasir putih yang luas.</div>
                 </div>
-            </div>
-            <div class="item" onclick="toggleItem(this, 'item14')">
-                <div class="checkbox-custom"></div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item14">
+                <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">18.30 - Selesai</span>
                     <div class="title">Kembali ke Legon Pari</div>
                     <div class="desc">Makan malam dan istirahat.</div>
                 </div>
-            </div>
+            </label>
         </div>
     </div>
 
@@ -390,54 +424,60 @@
             <span class="badge">RUTE PULANG</span>
         </div>
         <div class="timeline">
-            <div class="item" onclick="toggleItem(this, 'item15')">
-                <div class="checkbox-custom"></div>
+            <label class="item">
+                <input type="checkbox" id="item15">
+                <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">05.00 - 07.00</span>
                     <div class="title">Pantai Legon Pari</div>
                     <div class="desc">Cukup jalan kaki dari cabin untuk mengejar sunrise dan menikmati pantai teluk yang tenang.</div>
                 </div>
-            </div>
-            <div class="item" onclick="toggleItem(this, 'item16')">
-                <div class="checkbox-custom"></div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item16">
+                <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">07.30 - 09.00</span>
                     <div class="title">Sarapan dan Mandi</div>
                     <div class="desc">Persiapan sebelum check-out.</div>
                 </div>
-            </div>
-            <div class="item" onclick="toggleItem(this, 'item17')">
-                <div class="checkbox-custom"></div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item17">
+                <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">09.00 - 11.00</span>
                     <div class="title">Aktivitas Opsional</div>
                     <div class="desc">Jalan kaki ke area Karang Warna (sebelah Legon Pari) untuk foto-foto tambahan, atau sekadar bersantai di depan cabin.</div>
                 </div>
-            </div>
-            <div class="item" onclick="toggleItem(this, 'item18')">
-                <div class="checkbox-custom"></div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item18">
+                <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">11.00 - 12.00</span>
                     <div class="title">Packing dan Check-out</div>
                     <div class="desc">Meninggalkan Cabin Legon Pari.</div>
                 </div>
-            </div>
-            <div class="item" onclick="toggleItem(this, 'item19')">
-                <div class="checkbox-custom"></div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item19">
+                <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">12.00 - 13.00</span>
                     <div class="title">Makan Siang</div>
                     <div class="desc">Dilakukan sebelum memulai perjalanan jauh.</div>
                 </div>
-            </div>
-            <div class="item" onclick="toggleItem(this, 'item20')">
-                <div class="checkbox-custom"></div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item20">
+                <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">13.00 - 17.30</span>
                     <div class="title">Perjalanan Naik Motor Kembali ke Serang</div>
                     <div class="desc">Lebih aman jalan siang agar melewati jalur Gunung Kencana/Pandeglang sebelum gelap.</div>
                 </div>
-            </div>
+            </label>
         </div>
         <div class="note-box">
             <strong>Catatan Penting:</strong>
@@ -445,7 +485,7 @@
         </div>
     </div>
 
-    <!-- 📸 WIDGET GOOGLE DRIVE -->
+    <!-- 6. WIDGET GOOGLE DRIVE -->
     <div class="widget-card" style="text-align: center; padding: 22px 20px; background: linear-gradient(135deg, #ffffff, #f0f7ff); border: 2px solid #e1effe; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);">
         <div style="margin-bottom: 10px;">
             <span style="font-size: 28px;">📸✨</span>
@@ -463,26 +503,6 @@
         © 2026 Sawarna Road Trip Guide
     </div>
 
-    <!-- ⚙️ SCRIPT JAVASCRIPT UNTUK CEKLIS & SIMPAN OTOMATIS -->
+    <!-- ⚙️ AUTO SAVE PENYIMPANAN MEMORI -->
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Load status centang dari LocalStorage
-            const savedData = JSON.parse(localStorage.getItem("sawarna_checked_items")) || {};
-            for (const itemId in savedData) {
-                if (savedData[itemId]) {
-                    const el = document.querySelector(`[onclick*="'${itemId}'"]`);
-                    if (el) {
-                        el.classList.add("completed");
-                    }
-                }
-            }
-        });
-
-        function toggleItem(element, itemId) {
-            // Toggle class completed
-            element.classList.toggle("completed");
-            
-            // Simpan status centang
-            const savedData = JSON.parse(localStorage.getItem("sawarna_checked_items")) || {};
-            savedData[itemId] = element.classList.contains("completed");
-            localStorage.setItem("sawarna_checked_items", J
+        document.querySelectorAll('input[type="checkbox"]').for
