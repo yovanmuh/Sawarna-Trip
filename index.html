@@ -563,7 +563,7 @@
             });
         });
 
-        // 2. LOGIKA COUNTDOWN TIMER (HARI, JAM, MENIT)
+        // 2. LOGIKA COUNTDOWN TIMER (HARI, JAM, MENIT, DETIK)
         const targetDate = new Date("August 2, 2026 05:00:00").getTime();
 
         function updateCountdown() {
@@ -574,17 +574,18 @@
                 const days = Math.floor(difference / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-                document.getElementById("days").innerText = days;
-                document.getElementById("hours").innerText = hours;
-                document.getElementById("minutes").innerText = minutes;
+                if (document.getElementById("days")) document.getElementById("days").innerText = days;
+                if (document.getElementById("hours")) document.getElementById("hours").innerText = hours;
+                if (document.getElementById("minutes")) document.getElementById("minutes").innerText = minutes;
+                if (document.getElementById("seconds")) document.getElementById("seconds").innerText = seconds;
             } else {
                 document.querySelector(".countdown-container").innerHTML = "<div style='font-size:16px; font-weight:bold; margin-top:10px;'>🥳 Selamat Berlibur! Have Fun! 🎉</div>";
             }
         }
 
+        // Jalankan fungsi tiap 1000ms (1 detik)
         setInterval(updateCountdown, 1000);
         updateCountdown();
     </script>
-</body>
-</html>
