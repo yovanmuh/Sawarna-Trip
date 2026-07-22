@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #f4f7f6;
+            background-color: #fff0f5;
             color: #333;
             padding: 20px;
             display: flex;
@@ -23,13 +23,13 @@
 
         .header {
             text-align: center;
-            background: linear-gradient(135deg, #008891, #005f73);
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
             color: white;
             padding: 30px 20px;
             border-radius: 20px;
             width: 100%;
             max-width: 600px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
             margin-bottom: 20px;
         }
 
@@ -40,10 +40,10 @@
 
         .header p {
             font-size: 13px;
-            opacity: 0.9;
+            opacity: 0.95;
         }
 
-        /* ⏳ COUNTDOWN TIMER STYLE (4 KOTAK: HARI, JAM, MENIT, DETIK) */
+        /* ⏳ COUNTDOWN TIMER STYLE */
         .countdown-container {
             display: flex;
             justify-content: center;
@@ -52,13 +52,13 @@
         }
 
         .countdown-box {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.25);
             backdrop-filter: blur(5px);
             padding: 8px 12px;
             border-radius: 12px;
             min-width: 65px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.4);
         }
 
         .countdown-num {
@@ -70,7 +70,7 @@
         .countdown-label {
             font-size: 9px;
             text-transform: uppercase;
-            opacity: 0.8;
+            opacity: 0.9;
             letter-spacing: 0.5px;
         }
 
@@ -89,7 +89,7 @@
             object-fit: cover;
             border-radius: 50%;
             border: 4px solid #ffffff;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
             animation: floatEffect 3s infinite ease-in-out;
         }
 
@@ -112,8 +112,9 @@
             width: 100%;
             max-width: 600px;
             margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.1);
             overflow: hidden;
+            border: 1px solid #ffe4e1;
         }
 
         .day-header {
@@ -124,16 +125,16 @@
             align-items: center;
         }
 
-        .day-1 { background-color: #008891; }
-        .day-2 { background-color: #005f73; }
-        .day-3 { background-color: #0a9396; }
+        .day-1 { background-color: #ff69b4; }
+        .day-2 { background-color: #ff1493; }
+        .day-3 { background-color: #d81b60; }
 
         .day-header h2 {
             font-size: 16px;
         }
 
         .badge {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.3);
             padding: 4px 10px;
             border-radius: 12px;
             font-size: 10px;
@@ -171,7 +172,7 @@
             height: 22px;
             width: 22px;
             background-color: #fff;
-            border: 2px solid #ccc;
+            border: 2px solid #ffb6c1;
             border-radius: 50%;
             margin-right: 12px;
             margin-top: 2px;
@@ -183,8 +184,8 @@
         }
 
         .item input:checked ~ .checkmark {
-            background-color: #0a9396;
-            border-color: #0a9396;
+            background-color: #ff69b4;
+            border-color: #ff69b4;
         }
 
         .checkmark:after {
@@ -215,8 +216,8 @@
         .time {
             font-size: 11px;
             font-weight: bold;
-            color: #005f73;
-            background: #e0f2f1;
+            color: #d81b60;
+            background: #ffe4e1;
             padding: 2px 8px;
             border-radius: 10px;
             display: inline-block;
@@ -239,19 +240,19 @@
         }
 
         .note-box {
-            background: #e0f2f1;
-            border-left: 4px solid #0a9396;
+            background: #fff0f5;
+            border-left: 4px solid #ff69b4;
             padding: 12px;
             margin: 15px 20px;
             border-radius: 8px;
             font-size: 12px;
-            color: #005f73;
+            color: #c71585;
         }
 
         .footer-tip {
             text-align: center;
             font-size: 11px;
-            color: #aaa;
+            color: #b08d9b;
             margin: 10px 0 30px 0;
         }
     </style>
@@ -289,31 +290,31 @@
     </div>
 
     <!-- 2. WIDGET RUTE GOOGLE MAPS -->
-    <div class="widget-card" style="text-align: center; padding: 22px 20px; background: linear-gradient(135deg, #eef9ff, #ffffff); border: 2px solid #0a9396; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);">
+    <div class="widget-card" style="text-align: center; padding: 22px 20px; background: linear-gradient(135deg, #ffffff, #fff0f5); border: 2px solid #ff69b4; box-shadow: 0 8px 20px rgba(255, 105, 180, 0.15);">
         <div style="margin-bottom: 12px;">
             <span style="font-size: 26px;">🗺️🏍️💨</span>
-            <h3 style="font-size: 17px; color: #1e293b; margin: 6px 0 4px 0; font-weight: bold;">Rute Perjalanan Motoran Kita</h3>
-            <p style="font-size: 13px; color: #64748b; margin: 0;">Titik Kumpul: <b>Palima, Serang</b> ➔ <b>Pantai Sawarna</b></p>
+            <h3 style="font-size: 17px; color: #d81b60; margin: 6px 0 4px 0; font-weight: bold;">Rute Perjalanan Motoran Kita</h3>
+            <p style="font-size: 13px; color: #666; margin: 0;">Titik Kumpul: <b>Palima, Serang</b> ➔ <b>Pantai Sawarna</b></p>
         </div>
         
-        <div style="display: flex; justify-content: space-around; background: #ffffff; padding: 12px; border-radius: 14px; margin: 14px 0; border: 1px solid #e2e8f0;">
+        <div style="display: flex; justify-content: space-around; background: #ffffff; padding: 12px; border-radius: 14px; margin: 14px 0; border: 1px solid #ffe4e1;">
             <div>
-                <span style="font-size: 10px; color: #94a3b8; display: block; font-weight: bold;">JARAK</span>
-                <span style="font-size: 14px; color: #0f172a; font-weight: bold;">± 140 km</span>
+                <span style="font-size: 10px; color: #ffb6c1; display: block; font-weight: bold;">JARAK</span>
+                <span style="font-size: 14px; color: #d81b60; font-weight: bold;">± 140 km</span>
             </div>
-            <div style="border-right: 1px solid #e2e8f0;"></div>
+            <div style="border-right: 1px solid #ffe4e1;"></div>
             <div>
-                <span style="font-size: 10px; color: #94a3b8; display: block; font-weight: bold;">EST. WAKTU</span>
-                <span style="font-size: 14px; color: #0f172a; font-weight: bold;">± 3.5 - 4 Jam</span>
+                <span style="font-size: 10px; color: #ffb6c1; display: block; font-weight: bold;">EST. WAKTU</span>
+                <span style="font-size: 14px; color: #d81b60; font-weight: bold;">± 3.5 - 4 Jam</span>
             </div>
-            <div style="border-right: 1px solid #e2e8f0;"></div>
+            <div style="border-right: 1px solid #ffe4e1;"></div>
             <div>
-                <span style="font-size: 10px; color: #94a3b8; display: block; font-weight: bold;">JALUR</span>
-                <span style="font-size: 12px; color: #0a9396; font-weight: bold;">Pandeglang - Malingping</span>
+                <span style="font-size: 10px; color: #ffb6c1; display: block; font-weight: bold;">JALUR</span>
+                <span style="font-size: 12px; color: #ff1493; font-weight: bold;">Pandeglang - Malingping</span>
             </div>
         </div>
 
-        <a href="https://www.google.com/maps/dir/Palima,+Pasir+Teneng,+Kabupaten+Serang,+Banten/Sawarna+Beach/@-6.5828282,105.9693291,10z/" target="_blank" style="display: inline-block; padding: 12px 24px; background: #0a9396; color: white; font-weight: bold; font-size: 13px; text-decoration: none; border-radius: 50px; box-shadow: 0 4px 12px rgba(10, 147, 150, 0.3);">
+        <a href="https://www.google.com/maps/dir/Palima,+Pasir+Teneng,+Kabupaten+Serang,+Banten/Sawarna+Beach/@-6.5828282,105.9693291,10z/" target="_blank" style="display: inline-block; padding: 12px 24px; background: linear-gradient(135deg, #ff69b4, #ff1493); color: white; font-weight: bold; font-size: 13px; text-decoration: none; border-radius: 50px; box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);">
             📍 Buka Rute Google Maps Lengkap
         </a>
     </div>
@@ -360,9 +361,9 @@
                     <div class="title">Menuju Penginapan</div>
                     <div class="desc">Check-in</div>
                 </div>
-                </label>
+            </label>
             <label class="item">
-                <input type="checkbox" id="item4">
+                <input type="checkbox" id="item4_2">
                 <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">13.00 - 16.00</span>
@@ -421,7 +422,7 @@
                 <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">09.00 - 10.00</span>
-                    <div class="title">Slow Morning" </div>
+                    <div class="title">Slow Morning</div>
                     <div class="desc">Menikmati pagi yang santai di teras penginapan pertama sembari menyeduh kopi/teh.</div>
                 </div>
             </label>
@@ -448,7 +449,7 @@
                 <span class="checkmark"></span>
                 <div class="item-content">
                     <span class="time">18.30 - Selesai</span>
-                    <div class="title">Kembali </div>
+                    <div class="title">Kembali</div>
                     <div class="desc">Makan malam dan istirahat.</div>
                 </div>
             </label>
@@ -523,27 +524,27 @@
         </div>
     </div>
 
-    <!-- 6. WIDGET GOOGLE DRIVE (LINK SUDAH DIPASANG) -->
-    <div class="widget-card" style="text-align: center; padding: 22px 20px; background: linear-gradient(135deg, #ffffff, #f0f7ff); border: 2px solid #0a9396; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08
-        <div class="widget-card" style="text-align: center; padding: 22px 20px; background: linear-gradient(135deg, #ffffff, #f0f7ff); border: 2px solid #0a9396; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);">
+    <!-- 6. WIDGET GOOGLE DRIVE -->
+    <div class="widget-card" style="text-align: center; padding: 22px 20px; background: linear-gradient(135deg, #ffffff, #fff0f5); border: 2px solid #ff69b4; box-shadow: 0 10px 25px rgba(255, 105, 180, 0.15);">
         <div style="margin-bottom: 10px;">
             <span style="font-size: 28px;">📸✨</span>
-            <h3 style="font-size: 18px; color: #2c3e50; margin: 8px 0 4px 0; font-weight: bold;">Galeri Kenangan Kita di Sawarna</h3>
+            <h3 style="font-size: 18px; color: #d81b60; margin: 8px 0 4px 0; font-weight: bold;">Galeri Kenangan Kita di Sawarna</h3>
             <p style="font-size: 13px; color: #666; margin: 0 0 16px 0;">Tempat nyimpen semua foto momen manis & ketawa-tawa kita selama perjalanan! 💕</p>
         </div>
-        <a href="https://drive.google.com/drive/folders/1U79FBcXObGGDRohNKF2B4-YTqsqPsctA" target="_blank" style="display: inline-block; padding: 12px 24px; background: linear-gradient(135deg, #008891, #0a9396); color: white; font-weight: bold; font-size: 14px; text-decoration: none; border-radius: 50px; box-shadow: 0 4px 15px rgba(10, 147, 150, 0.3);">
+        <a href="https://drive.google.com/drive/folders/1U79FBcXObGGDRohNKF2B4-YTqsqPsctA" target="_blank" style="display: inline-block; padding: 12px 24px; background: linear-gradient(135deg, #ff69b4, #ff1493); color: white; font-weight: bold; font-size: 14px; text-decoration: none; border-radius: 50px; box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);">
             📂 Buka Folder Foto Drive
         </a>
         <p style="font-size: 11px; color: #888; margin-top: 14px; margin-bottom: 0; font-style: italic;">upload semua poto gembul kamu di sini cayang! 🧸🛵💨</p>
     </div>
-<!-- WIDGET PLAYLIST YOUTUBE -->
-    <div class="widget-card" style="text-align: center; padding: 22px 20px; background: linear-gradient(135deg, #ffffff, #fff5f5); border: 2px solid #ff0000; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);">
+
+    <!-- 7. WIDGET PLAYLIST YOUTUBE -->
+    <div class="widget-card" style="text-align: center; padding: 22px 20px; background: linear-gradient(135deg, #ffffff, #fff0f5); border: 2px solid #ff69b4; box-shadow: 0 10px 25px rgba(255, 105, 180, 0.15);">
         <div style="margin-bottom: 10px;">
             <span style="font-size: 28px;">🎵🎧</span>
-            <h3 style="font-size: 18px; color: #2c3e50; margin: 8px 0 4px 0; font-weight: bold;">Playlist Perjalanan Kita</h3>
+            <h3 style="font-size: 18px; color: #d81b60; margin: 8px 0 4px 0; font-weight: bold;">Playlist Perjalanan Kita</h3>
             <p style="font-size: 13px; color: #666; margin: 0 0 16px 0;">Lagu-lagu favorit kita buat nemenin perjalanan di jalan! 🛵🎶</p>
         </div>
-        <a href="https://youtube.com/playlist?list=PLTciCZIgAPP8&si=Ijf4nSAExJCYYKtO" target="_blank" style="display: inline-block; padding: 12px 24px; background: linear-gradient(135deg, #ff0000, #cc0000); color: white; font-weight: bold; font-size: 14px; text-decoration: none; border-radius: 50px; box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);">
+        <a href="https://youtube.com/playlist?list=PLTciCZIgAPP8&si=Ijf4nSAExJCYYKtO" target="_blank" style="display: inline-block; padding: 12px 24px; background: linear-gradient(135deg, #ff69b4, #ff1493); color: white; font-weight: bold; font-size: 14px; text-decoration: none; border-radius: 50px; box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);">
             ▶️ Putar Playlist YouTube
         </a>
         <p style="font-size: 11px; color: #888; margin-top: 14px; margin-bottom: 0; font-style: italic;">Dengerin bareng-bareng pas lagi touring ya! 💖✨</p>
@@ -592,3 +593,5 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
     </script>
+</body>
+</html>
