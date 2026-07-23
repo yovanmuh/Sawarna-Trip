@@ -255,9 +255,56 @@
             color: #b08d9b;
             margin: 10px 0 30px 0;
         }
+        /* 🌙 STYLE MODE MALAM PINK */
+        body.dark-mode {
+            background-color: #2a0818 !important;
+            color: #ffd1dc !important;
+        }
+
+        body.dark-mode .day-card,
+        body.dark-mode .widget-card {
+            background: #3d0c24 !important;
+            border-color: #ff1493 !important;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.2) !important;
+        }
+
+        body.dark-mode .title {
+            color: #ffffff !important;
+        }
+
+        body.dark-mode .desc {
+            color: #ffb6c1 !important;
+        }
+
+        body.dark-mode .checkmark {
+            background-color: #3d0c24 !important;
+            border-color: #ff69b4 !important;
+        }
+
+        body.dark-mode .note-box {
+            background: #2a0818 !important;
+            color: #ffb6c1 !important;
+        }
+
+        body.dark-mode .time {
+            background: #5c1339 !important;
+            color: #ff91af !important;
+        }
+
+        body.dark-mode .widget-card div[style*="background: #ffffff"],
+        body.dark-mode .widget-card div[style*="background: rgb(255, 255, 255)"] {
+            background: #2a0818 !important;
+            border-color: #ff1493 !important;
+        }
     </style>
 </head>
 <body>
+    <!-- 🌙 TOMBOL MODE MALAM PINK -->
+    <div style="position: fixed; top: 15px; right: 15px; z-index: 99999;">
+        <button id="themeToggleBtn" onclick="toggleTheme()" style="padding: 8px 14px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(5px); color: #d81b60; border: 2px solid #ff69b4; border-radius: 20px; font-weight: bold; font-size: 11px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); outline: none;">
+            🌙 Mode Malam Pink
+        </button>
+    </div>
 
     <!-- 1. HEADER UTAMA + COUNTDOWN (HARI, JAM, MENIT, DETIK) -->
     <div class="header">
@@ -626,6 +673,25 @@
         // Jalankan fungsi tiap 1000ms (1 detik)
         setInterval(updateCountdown, 1000);
         updateCountdown();
+        // 3. LOGIKA TOMBOL MODE MALAM PINK (DARK MODE)
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const btn = document.getElementById('themeToggleBtn');
+            if (document.body.classList.contains('dark-mode')) {
+                btn.innerHTML = '☀️ Mode Siang Pink';
+                localStorage.setItem('pinkDarkMode', 'enabled');
+            } else {
+                btn.innerHTML = '🌙 Mode Malam Pink';
+                localStorage.setItem('pinkDarkMode', 'disabled');
+            }
+        }
+
+        // Ingat pilihan mode malam saat halaman dibuka ulang
+        if (localStorage.getItem('pinkDarkMode') === 'enabled') {
+            document.body.classList.add('dark-mode');
+            const btn = document.getElementById('themeToggleBtn');
+            if (btn) btn.innerHTML = '☀️ Mode Siang Pink';
+        }
     </script>
 </body>
 </html>
