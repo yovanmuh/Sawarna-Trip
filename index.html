@@ -18,7 +18,7 @@
             --border-radius: 16px;
         }
 
-        /* Styling Mode Malam Pink */
+        /* Styling Mode Malam Pink (Dark Mode) */
         body.dark-mode {
             --bg-color: #1a0f18;
             --card-bg: #2a1f28;
@@ -167,7 +167,7 @@
             font-size: 14px;
         }
 
-        /* Checklist dengan Ikon LOVE (❤️) */
+        /* Checklist dengan ikon Love (❤️) saat dicentang */
         .checklist label {
             display: flex;
             align-items: center;
@@ -202,7 +202,6 @@
             border-color: var(--primary-color);
         }
 
-        /* Muncul Simbol Love saat Dicentang */
         .checklist input[type="checkbox"]:checked::before {
             content: "❤️";
             font-size: 12px;
@@ -362,6 +361,7 @@
         });
 
         // 2. LOGIKA COUNTDOWN TIMER (HARI, JAM, MENIT, DETIK)
+        // Disesuaikan dengan tanggal keberangkatan kamu (Contoh: 10 Agustus 2026, 05:00 WIB)
         const targetDate = new Date("August 10, 2026 05:00:00").getTime();
 
         function updateCountdown() {
@@ -374,40 +374,27 @@
                 const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-                if (document.getElementById("days")) document.getElementById("days").innerText = days;
-                if (document.getElementById("hours")) document.getElementById("hours").innerText = hours;
-                if (document.getElementById("minutes")) document.getElementById("minutes").innerText = minutes;
-                if (document.getElementById("seconds")) document.getElementById("seconds").innerText = seconds;
+                document.getElementById("days").innerText = days;
+                document.getElementById("hours").innerText = hours;
+                document.getElementById("minutes").innerText = minutes;
+                document.getElementById("seconds").innerText = seconds;
             } else {
-                const countdownContainer = document.querySelector('.countdown-container');
-                if (countdownContainer) {
-                    countdownContainer.innerHTML = "<div style='font-weight:bold; font-size:16px; color:#fff;'>🎉 Yeay! Waktunya Road Trip ke Sawarna! 🏍️💨</div>";
-                }
+                document.querySelector('.countdown-container').innerHTML = "<div style='font-weight:bold; font-size:16px;'>🎉 Yeay! Waktunya Road Trip ke Sawarna! 🏍️💨</div>";
             }
         }
 
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // 3. LOGIKA TOGGLE MODE MALAM PINK
+        // 3. LOGIKA TOGGLE MODE MALAM PINK (DARK MODE)
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
             const btn = document.getElementById('themeToggleBtn');
-            const isDarkMode = document.body.classList.contains('dark-mode');
-            
-            localStorage.setItem('darkMode', isDarkMode);
-            
-            if (isDarkMode) {
+            if (document.body.classList.contains('dark-mode')) {
                 btn.innerText = '☀️ Mode Terang';
             } else {
                 btn.innerText = '🌙 Mode Malam Pink';
             }
-        }
-
-        if (localStorage.getItem('darkMode') === 'true') {
-            document.body.classList.add('dark-mode');
-            const btn = document.getElementById('themeToggleBtn');
-            if (btn) btn.innerText = '☀️ Mode Terang';
         }
     </script>
 </body>
