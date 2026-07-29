@@ -16,6 +16,7 @@
             background-color: #fff0f5;
             color: #333;
             padding: 20px;
+            padding-bottom: 90px; /* Jarak bawah agar tidak tertutup Audio Player */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -301,6 +302,89 @@
             background: #2a0818 !important;
             border-color: #ff1493 !important;
         }
+
+        /* 🎵 MINI AUDIO PLAYER & VISUALIZER STYLES */
+        .audio-player-widget {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 9999;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 2px solid #ff69b4;
+            padding: 8px 14px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .audio-player-widget {
+            background: rgba(61, 12, 36, 0.9);
+            border-color: #ff1493;
+        }
+
+        .play-btn {
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            color: white;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            outline: none;
+        }
+
+        .audio-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .audio-title {
+            font-size: 11px;
+            font-weight: bold;
+            color: #d81b60;
+            white-space: nowrap;
+        }
+
+        body.dark-mode .audio-title {
+            color: #ffb6c1;
+        }
+
+        /* Soundwave Visualizer Bars */
+        .sound-wave {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 14px;
+            margin-top: 2px;
+        }
+
+        .wave-bar {
+            width: 3px;
+            height: 3px;
+            background-color: #ff1493;
+            border-radius: 2px;
+            transition: height 0.2s ease;
+        }
+
+        /* Animation when audio is playing */
+        .playing .wave-bar:nth-child(1) { animation: wave 1.2s infinite ease-in-out; }
+        .playing .wave-bar:nth-child(2) { animation: wave 0.8s infinite ease-in-out 0.2s; }
+        .playing .wave-bar:nth-child(3) { animation: wave 1.0s infinite ease-in-out 0.4s; }
+        .playing .wave-bar:nth-child(4) { animation: wave 0.7s infinite ease-in-out 0.1s; }
+
+        @keyframes wave {
+            0%, 100% { height: 3px; }
+            50% { height: 14px; }
+        }
     </style>
 </head>
 <body>
@@ -309,6 +393,22 @@
         <button id="themeToggleBtn" onclick="toggleTheme()" style="padding: 8px 14px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(5px); color: #d81b60; border: 2px solid #ff69b4; border-radius: 20px; font-weight: bold; font-size: 11px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); outline: none;">
             🌙 Mode Malam Pink
         </button>
+    </div>
+
+    <!-- 🎵 MINI AUDIO PLAYER WIDGET -->
+    <div class="audio-player-widget">
+        <button class="play-btn" id="audioPlayBtn" onclick="toggleAudio()">▶</button>
+        <div class="audio-info">
+            <span class="audio-title" id="songTitle">Jason Mraz - I'm Yours 🎵</span>
+            <div class="sound-wave" id="soundWave">
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+            </div>
+        </div>
+        <!-- File MP3 kamu dipasang di sini -->
+        <audio id="bgAudio" src="Jason Mraz - I'm Yours.mp3" preload="auto"></audio>
     </div>
 
     <!-- 1. HEADER UTAMA + COUNTDOWN (HARI, JAM, MENIT, DETIK) -->
@@ -433,7 +533,7 @@
     <div class="day-card">
         <div class="day-header day-1">
             <h2>Hari 1: Berangkat & ikon Karang taraje</h2>
-            <span class="badge">BERANGKAT</span>
+            <span class="badge">EKSPLORASI</span>
         </div>
         <div class="timeline">
             <label class="item">
@@ -506,7 +606,7 @@
     <div class="day-card">
         <div class="day-header day-2">
             <h2>Hari 2: Karang bokor & Tanjung Layar</h2>
-            <span class="badge">EKSPLORASI</span>
+            <span class="badge">PINDAH SPOT</span>
         </div>
         <div class="timeline">
             <label class="item">
@@ -716,7 +816,7 @@
         © 2026 Sawarna Road Trip With Yovan
     </div>
 
-    <!-- ⚙️ SCRIPT AUTO-SAVE CHECKBOX, COUNTDOWN TIMER, & TOGGLE DARK MODE -->
+    <!-- ⚙️ SCRIPT AUTO-SAVE CHECKBOX, COUNTDOWN TIMER, TOGGLE DARK MODE, & AUDIO PLAYER -->
     <script>
         // 1. MEMORI CHECKBOX OTOMATIS
         document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
@@ -766,6 +866,28 @@
                 btn.innerHTML = "🌙 Mode Malam Pink";
             }
         }
+
+        // 4. LOGIKA MINI AUDIO PLAYER & VISUALIZER
+        const audio = document.getElementById("bgAudio");
+        const playBtn = document.getElementById("audioPlayBtn");
+        const soundWave = document.getElementById("soundWave");
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                playBtn.innerHTML = "❚❚";
+                soundWave.classList.add("playing");
+            } else {
+                audio.pause();
+                playBtn.innerHTML = "▶";
+                soundWave.classList.remove("playing");
+            }
+        }
+
+        audio.onended = function() {
+            playBtn.innerHTML = "▶";
+            soundWave.classList.remove("playing");
+        };
     </script>
 </body>
 </html>
