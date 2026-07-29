@@ -1,1 +1,771 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sawarna Road Trip Guide</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
+        body {
+            background-color: #fff0f5;
+            color: #333;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 13px;
+            opacity: 0.95;
+        }
+
+        /* ⏳ COUNTDOWN TIMER STYLE */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .countdown-box {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(5px);
+            padding: 8px 12px;
+            border-radius: 12px;
+            min-width: 65px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .countdown-num {
+            font-size: 20px;
+            font-weight: bold;
+            display: block;
+        }
+
+        .countdown-label {
+            font-size: 9px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            letter-spacing: 0.5px;
+        }
+
+        .bike-animation-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 180px;
+            margin-top: 1rem;
+            position: relative;
+        }
+
+        .couple-photo {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #ffffff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            animation: floatEffect 3s infinite ease-in-out;
+        }
+
+        @keyframes floatEffect {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .widget-card {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .day-card {
+            background: white;
+            border-radius: 20px;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.1);
+            overflow: hidden;
+            border: 1px solid #ffe4e1;
+        }
+
+        .day-header {
+            padding: 15px 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .day-1 { background-color: #ff69b4; }
+        .day-2 { background-color: #ff1493; }
+        .day-3 { background-color: #d81b60; }
+
+        .day-header h2 {
+            font-size: 16px;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .timeline {
+            padding: 20px;
+        }
+
+        .item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 18px;
+            cursor: pointer;
+            position: relative;
+            user-select: none;
+        }
+
+        .item:last-child {
+            margin-bottom: 0;
+        }
+
+        .item input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        /* 💖 STYLE WIDGET CHECKMARK DIUBAH JADI LOVE */
+        .checkmark {
+            height: 22px;
+            width: 22px;
+            background-color: #fff;
+            border: 2px solid #ffb6c1;
+            border-radius: 50%;
+            margin-right: 12px;
+            margin-top: 2px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            font-size: 14px;
+        }
+
+        .item input:checked ~ .checkmark {
+            background-color: transparent;
+            border-color: transparent;
+        }
+
+        .checkmark:after {
+            content: "🤍"; /* Tampilan saat belum dicentang */
+            font-size: 16px;
+        }
+
+        .item input:checked ~ .checkmark:after {
+            content: "❤️"; /* Tampilan LOVE saat dicentang */
+            font-size: 18px;
+            animation: heartBeat 0.3s ease-in-out;
+        }
+
+        @keyframes heartBeat {
+            0% { transform: scale(0.8); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        .item input:checked ~ .item-content .title,
+        .item input:checked ~ .item-content .desc {
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+
+        .item-content {
+            flex: 1;
+        }
+
+        .time {
+            font-size: 11px;
+            font-weight: bold;
+            color: #d81b60;
+            background: #ffe4e1;
+            padding: 2px 8px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+
+        .title {
+            font-size: 14px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 2px;
+            transition: all 0.2s ease;
+        }
+
+        .desc {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.4;
+            transition: all 0.2s ease;
+        }
+
+        .note-box {
+            background: #fff0f5;
+            border-left: 4px solid #ff69b4;
+            padding: 12px;
+            margin: 15px 20px;
+            border-radius: 8px;
+            font-size: 12px;
+            color: #c71585;
+        }
+
+        .footer-tip {
+            text-align: center;
+            font-size: 11px;
+            color: #b08d9b;
+            margin: 10px 0 30px 0;
+        }
+
+        /* 🌙 STYLE MODE MALAM PINK */
+        body.dark-mode {
+            background-color: #2a0818 !important;
+            color: #ffd1dc !important;
+        }
+
+        body.dark-mode .day-card,
+        body.dark-mode .widget-card {
+            background: #3d0c24 !important;
+            border-color: #ff1493 !important;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.2) !important;
+        }
+
+        body.dark-mode .title {
+            color: #ffffff !important;
+        }
+
+        body.dark-mode .desc {
+            color: #ffb6c1 !important;
+        }
+
+        body.dark-mode .checkmark {
+            background-color: transparent !important;
+            border-color: #ff69b4 !important;
+        }
+
+        body.dark-mode .note-box {
+            background: #2a0818 !important;
+            color: #ffb6c1 !important;
+        }
+
+        body.dark-mode .time {
+            background: #5c1339 !important;
+            color: #ff91af !important;
+        }
+
+        body.dark-mode .widget-card div[style*="background: #ffffff"],
+        body.dark-mode .widget-card div[style*="background: rgb(255, 255, 255)"] {
+            background: #2a0818 !important;
+            border-color: #ff1493 !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- 🌙 TOMBOL MODE MALAM PINK -->
+    <div style="position: fixed; top: 15px; right: 15px; z-index: 99999;">
+        <button id="themeToggleBtn" onclick="toggleTheme()" style="padding: 8px 14px; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(5px); color: #d81b60; border: 2px solid #ff69b4; border-radius: 20px; font-weight: bold; font-size: 11px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.1); outline: none;">
+            🌙 Mode Malam Pink
+        </button>
+    </div>
+
+    <!-- 1. HEADER UTAMA + COUNTDOWN (HARI, JAM, MENIT, DETIK) -->
+    <div class="header">
+        <h1>Itinerary Ke Sawarna</h1>
+        <p>Tak peduli seberapa jauh jaraknya, asal tujuannya bersamamu, aku pasti bahagia ❤️</p>
+        
+        <!-- ⏳ COUNTDOWN WIDGET -->
+        <div class="countdown-container">
+            <div class="countdown-box">
+                <span class="countdown-num" id="days">0</span>
+                <span class="countdown-label">Hari</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-num" id="hours">0</span>
+                <span class="countdown-label">Jam</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-num" id="minutes">0</span>
+                <span class="countdown-label">Menit</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-num" id="seconds">0</span>
+                <span class="countdown-label">Detik</span>
+            </div>
+        </div>
+
+        <div class="bike-animation-container">
+            <img src="motor.png" class="couple-photo" alt="Foto Kebersamaan" onerror="this.src='https://via.placeholder.com/160?text=Couple+Photo'">
+        </div>
+    </div>
+
+    <!-- 2. WIDGET RUTE GOOGLE MAPS -->
+    <div class="widget-card" style="text-align: center; padding: 22px 20px; background: linear-gradient(135deg, #ffffff, #fff0f5); border: 2px solid #ff69b4; box-shadow: 0 8px 20px rgba(255, 105, 180, 0.15);">
+        <div style="margin-bottom: 12px;">
+            <span style="font-size: 26px;">🗺️🏍️💨</span>
+            <h3 style="font-size: 17px; color: #d81b60; margin: 6px 0 4px 0; font-weight: bold;">Rute Perjalanan Motoran Kita</h3>
+            <p style="font-size: 13px; color: #666; margin: 0;">Titik Kumpul: <b>Palima, Serang</b> ➔ <b>Pantai Sawarna</b></p>
+        </div>
+        
+        <div style="display: flex; justify-content: space-around; background: #ffffff; padding: 12px; border-radius: 14px; margin: 14px 0; border: 1px solid #ffe4e1;">
+            <div>
+                <span style="font-size: 10px; color: #ffb6c1; display: block; font-weight: bold;">JARAK</span>
+                <span style="font-size: 14px; color: #d81b60; font-weight: bold;">± 140 km</span>
+            </div>
+            <div style="border-right: 1px solid #ffe4e1;"></div>
+            <div>
+                <span style="font-size: 10px; color: #ffb6c1; display: block; font-weight: bold;">EST. WAKTU</span>
+                <span style="font-size: 14px; color: #d81b60; font-weight: bold;">± 3.5 - 4 Jam</span>
+            </div>
+            <div style="border-right: 1px solid #ffe4e1;"></div>
+            <div>
+                <span style="font-size: 10px; color: #ffb6c1; display: block; font-weight: bold;">JALUR</span>
+                <span style="font-size: 12px; color: #ff1493; font-weight: bold;">Pandeglang - Malingping</span>
+            </div>
+        </div>
+
+        <a href="https://www.google.com/maps/dir/Taman+PALIMA,+R4CX%2BHPX,+Palima,+Sukajaya,+Curug,+Serang+City,+Banten+42717/Kec.+Gunungkencana,+Kabupaten+Lebak,+Banten/Sawarna,+Kec.+Bayah,+Kabupaten+Lebak,+Banten/@-6.5772485,105.8295709,130309m/data=!3m2!1e3!4b1!4m20!4m19!1m5!1m1!1s0x2e4220226038c763:0xc9363e8d5e52286a!2m2!1d106.1493582!2d-6.1785236!1m5!1m1!1s0x2e424487d836cc85:0x91584a66e19271e5!2m2!1d106.0742842!2d-6.5732782!1m5!1m1!1s0x2e428fcd42bd163f:0xcd9e4446677b752d!2m2!1d106.3051766!2d-6.9708301!3e9?entry=ttu&g_ep=EgoyMDI2MDcxOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" style="display: inline-block; padding: 12px 24px; background: linear-gradient(135deg, #ff69b4, #ff1493); color: white; font-weight: bold; font-size: 13px; text-decoration: none; border-radius: 50px; box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);">
+            📍 Buka Rute Google Maps Lengkap
+        </a>
+    </div>
+
+    <div class="widget-card" style="padding: 22px 20px; background: linear-gradient(135deg, #fff5f8, #ffffff); border: 2px solid #ff69b4; box-shadow: 0 8px 20px rgba(255, 105, 180, 0.15);">
+        <div style="text-align: center; margin-bottom: 16px;">
+            <span style="font-size: 28px;">🌅🏖️🌄</span>
+            <h3 style="font-size: 18px; color: #d81b60; margin: 6px 0 4px 0; font-weight: bold;">Spot Pantai & Golden Hour Sawarna</h3>
+            <p style="font-size: 12px; color: #666; margin: 0;">Panduan waktu terbaik eksplorasi pantai</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <!-- SUNSET SPOTS -->
+            <div style="background: #fff0f3; padding: 12px; border-radius: 14px; border: 1px solid #ffb6c1; text-align: center;">
+                <span style="font-size: 20px; display: block; margin-bottom: 2px;">🌅</span>
+                <span style="font-size: 10px; color: #d81b60; font-weight: bold;">SPOT SUNSET</span>
+                <div style="font-size: 15px; font-weight: bold; color: #ff1493; margin: 2px 0;">17.15 - 18.00 WIB</div>
+                <p style="font-size: 11px; color: #555; margin-top: 4px; line-height: 1.3;">
+                    📍 <b>Tanjung Layar</b> (Karang Icon)<br>
+                    📍 <b>Pantai Ciantir</b> (Pasir Putih)
+                </p>
+            </div>
+
+            <!-- SUNRISE SPOT -->
+            <div style="background: #fff8e7; padding: 12px; border-radius: 14px; border: 1px solid #ffe082; text-align: center;">
+                <span style="font-size: 20px; display: block; margin-bottom: 2px;">🌄</span>
+                <span style="font-size: 10px; color: #e65100; font-weight: bold;">SPOT SUNRISE</span>
+                <div style="font-size: 15px; font-weight: bold; color: #f57c00; margin: 2px 0;">05.30 - 06.15 WIB</div>
+                <p style="font-size: 11px; color: #555; margin-top: 4px; line-height: 1.3;">
+                    📍 <b>Legon Pari</b><br>
+                    <i>(Matahari terbit dari garis laut)</i>
+                </p>
+            </div>
+
+            <!-- SPOT KARANG & WAVE -->
+            <div style="background: #eef7ff; padding: 12px; border-radius: 14px; border: 1px solid #90caf9; text-align: center;">
+                <span style="font-size: 20px; display: block; margin-bottom: 2px;">🌊</span>
+                <span style="font-size: 10px; color: #1565c0; font-weight: bold;">AIR TERJUN KARANG</span>
+                <div style="font-size: 15px; font-weight: bold; color: #1e88e5; margin: 2px 0;">06.00 - 08.00 WIB</div>
+                <p style="font-size: 11px; color: #555; margin-top: 4px; line-height: 1.3;">
+                    📍 <b>Karang Taraje</b><br>
+                    <i>(Ombak menghantam tangga karang)</i>
+                </p>
+            </div>
+
+            <!-- SPOT TEBING & FOTO -->
+            <div style="background: #f3e5f5; padding: 12px; border-radius: 14px; border: 1px solid #ce93d8; text-align: center;">
+                <span style="font-size: 20px; display: block; margin-bottom: 2px;">🌉</span>
+                <span style="font-size: 10px; color: #6a1b9a; font-weight: bold;">TEBING & JEMBATAN</span>
+                <div style="font-size: 15px; font-weight: bold; color: #8e24aa; margin: 2px 0;">09.30 - 11.30 WIB</div>
+                <p style="font-size: 11px; color: #555; margin-top: 4px; line-height: 1.3;">
+                    📍 <b>Karang Bokor</b><br>
+                    <i>(Pemandangan laut dari atas tebing)</i>
+                </p>
+            </div>
+        </div>
+
+        <div style="margin-top: 12px; background: rgba(255, 105, 180, 0.1); padding: 10px; border-radius: 10px; text-align: center; font-size: 11px; color: #c71585;">
+            💡 <b>Tip Mesra:</b> Malamnya pas pantai sepi, duduk berdua di Pantai Ciantir sambil dengerin ombak & liat bintang di langit 🌌🕯️
+        </div>
+    </div>
+
+    <!-- 3. HARI 1 -->
+    <div class="day-card">
+        <div class="day-header day-1">
+            <h2>Hari 1: Berangkat & ikon Karang taraje</h2>
+            <span class="badge">EKSPLORASI</span>
+        </div>
+        <div class="timeline">
+            <label class="item">
+                <input type="checkbox" id="item1">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <span class="time">05.00 - 09.30</span>
+                    <div class="title">Berangkat🏍️💨</div>
+                    <div class="desc">Jalur Serang - Pandeglang - Gunung Kencana - Malingping - Bayah - Sawarna.</div>
+                </div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item2">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <span class="time">09.30 - 11.30</span>
+                    <div class="title">Masuk & Wisata di Karang taraje Sawarna📸</div>
+                    <div class="desc">Melihat ombak air terjun karang.</div>
+                </div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item3">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <span class="time">11.30 - 12.30</span>
+                    <div class="title">Makan Siang🍛</div>
+                    <div class="desc">Makan di sekitar Sawarna.</div>
+                </div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item4">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <span class="time">12.30 - 13.00</span>
+                    <div class="title">Menuju Penginapan🏡</div>
+                    <div class="desc">Check-in</div>
+                </div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item4_2">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <span class="time">13.00 - 16.00</span>
+                    <div class="title">Istirahat🛌🛀 </div>
+                    <div class="desc">Mandi dan beristirahat di penginapan.</div>
+                </div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item5">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <span class="time">16.00 - 18.00</span>
+                    <div class="title">Pantai Ciantir🏍️🌅</div>
+                    <div class="desc">Untuk menikmati sunset di hamparan pasir putih yang luas.</div>
+                </div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item6">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <span class="time">19.00 - Selesai</span>
+                    <div class="title">Makan Malam & Istirahat Total🛌</div>
+                    <div class="desc">Makan di penginapan lalu istirahat.</div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <!-- 4. HARI 2 -->
+    <div class="day-card">
+        <div class="day-header day-2">
+            <h2>Hari 2: Karang bokor & Tanjung Layar</h2>
+            <span class="badge">PINDAH SPOT</span>
+        </div>
+        <div class="timeline">
+            <label class="item">
+                <input type="checkbox" id="item7">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <span class="time">06.00 - 07.00</span>
+                    <div class="title">Bangun Pagi⏰</div>
+                    <div class="desc">Persiapan agenda pagi hari.</div>
+                </div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item8">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <span class="time">07.00 - 08.00</span>
+                    <div class="title">Slow Morning🌞</div>
+                    <div class="desc">Menikmati pagi yang santai di teras penginapan pertama sembari menyeduh kopi/teh.</div>
+                </div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item9">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <span class="time">09.00 - 11.00</span>
+                    <div class="title">ke Pantai Karang bokor🏞️🌊📸</div>
+                    <div class="desc">Foto-foto di jembatan tebing dan tebing karang indah.</div>
+                </div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item10">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <span class="time">11.00 - 11.30</span>
+                    <div class="title">kembali ke penginapan</div>
+                    <div class="desc">Istirahat dan aktivitas di penginapan.</div>
+                </div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item11">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <span class="time">11.30 - 17.00</span>
+                    <div class="title">Aktivitas di penginapan🛌</div>
+                    <div class="desc">Menikmati Kebersamaan Di Penginapan.</div>
+                </div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item13">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <span class="time">17.00 - 20.00</span>
+                    <div class="title">Ke Pantai tanjung layar </div>
+                    <div class="desc">Foto berdua di batu raksasa & menikmati sunset.</div>
+                </div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item14">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <span class="time">20.00 - Selesai</span>
+                    <div class="title">Kembali🍽️🛌</div>
+                    <div class="desc">Makan malam dan istirahat.</div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <!-- 5. HARI 3 -->
+    <div class="day-card">
+        <div class="day-header day-3">
+            <h2>Hari ke 3: Sunrise Legon Pari & Pulang</h2>
+            <span class="badge">RUTE PULANG</span>
+        </div>
+        <div class="timeline">
+            <label class="item">
+                <input type="checkbox" id="item15">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <span class="time">05.00 - 08.00</span>
+                    <div class="title">Pantai Legon Pari🏍️</div>
+                    <div class="desc">Untuk mengejar sunrise dan menikmati pantai teluk yang tenang.</div>
+                </div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item16">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <span class="time">08.00 - 09.00</span>
+                    <div class="title">Ngopi dan bersantai🥂</div>
+                    <div class="desc">Ngaso sejenak di area penginapan, meresapi kehangatan segelas kopi dan hangatnya kebersamaan kita setelah melewati perjalanan panjang kemarin.</div>
+                </div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item17">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <span class="time">09.00 - 11.00</span>
+                    <div class="title">Aktivitas di penginapan🛌</div>
+                    <div class="desc">Menikmati Kebersamaan</div>
+                </div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item18">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <span class="time">11.00 - 12.00</span>
+                    <div class="title">Packing dan Check-out🧳</div>
+                    <div class="desc">Mandi dan berkemas.</div>
+                </div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item19">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <span class="time">12.00 - 13.00</span>
+                    <div class="title">Makan Siang🍽️</div>
+                    <div class="desc">Sebelum memulai perjalanan jauh.</div>
+                </div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="item20">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <span class="time">13.00 - 17.30</span>
+                    <div class="title">Perjalanan Naik Motor Kembali ke Serang🏍️💨</div>
+                    <div class="desc">Lebih aman jalan siang agar melewati jalur Gunung Kencana/Pandeglang sebelum gelap.</div>
+                </div>
+            </label>
+        </div>
+        <div class="note-box">
+            <strong>Catatan Penting:</strong>
+            Jangan sampai ada barang yang ketinggalan ya cayang, terutama hati kamu... Jangan sampai tertinggal di Sawarna! 💖
+        </div>
+    </div>
+
+    <!-- WIDGET JANJI MOTORAN ROMANTIS -->
+    <div class="day-card" style="border: 2px solid #ff69b4;">
+        <div class="day-header" style="background: linear-gradient(135deg, #ff69b4, #ff1493);">
+            <h2>📜 Aturan Diperjalanan</h2>
+            <span class="badge">SWEET RULES</span>
+        </div>
+        <div class="timeline">
+            <label class="item">
+                <input type="checkbox" id="rule0">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <div class="title">Dilarang Menceklis Sebelum Melaksanakan 🚫</div>
+                    <div class="desc">Jangan curang ya! Hanya boleh menceklis agenda yang sudah kita lakukan.</div>
+                </div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="rule1">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <div class="title">Dilarang diet saat road trip 🍲</div>
+                    <div class="desc">Wajib makan enak tanpa mikirin timbangan.</div>
+                </div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="rule2">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <div class="title">Wajib Bahagia ❤️</div>
+                    <div class="desc">Tujuan utama trip ini bukan cuma Pantai Sawarna, tapi menikmati setiap detik senyum dan tawa di sepanjang jalan.</div>
+                </div>
+            </label>
+            <label class="item">
+                <input type="checkbox" id="rule4">
+                <span class="checkmark"></span>
+                <div class="item-content">
+                    <div class="title">Foto Momen Manis Sebanyak-banyaknya 📸</div>
+                    <div class="desc">Biaya foto gratis, kenangannya ga ternilai!</div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <!-- 6. WIDGET GOOGLE DRIVE -->
+    <div class="widget-card" style="text-align: center; padding: 22px 20px; background: linear-gradient(135deg, #ffffff, #fff0f5); border: 2px solid #ff69b4; box-shadow: 0 10px 25px rgba(255, 105, 180, 0.15);">
+        <div style="margin-bottom: 10px;">
+            <span style="font-size: 28px;">📸✨</span>
+            <h3 style="font-size: 18px; color: #d81b60; margin: 8px 0 4px 0; font-weight: bold;">Galeri Kenangan Kita di Sawarna</h3>
+            <p style="font-size: 13px; color: #666; margin: 0 0 16px 0;">Tempat nyimpen semua foto momen manis & ketawa-tawa kita selama perjalanan! 💕</p>
+        </div>
+        <a href="https://drive.google.com/drive/folders/1U79FBcXObGGDRohNKF2B4-YTqsqPsctA" target="_blank" style="display: inline-block; padding: 12px 24px; background: linear-gradient(135deg, #ff69b4, #ff1493); color: white; font-weight: bold; font-size: 14px; text-decoration: none; border-radius: 50px; box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);">
+            📂 Buka Folder Foto Drive
+        </a>
+        <p style="font-size: 11px; color: #888; margin-top: 14px; margin-bottom: 0; font-style: italic;">upload semua poto gembul kamu di sini cayang! 🧸🛵💨</p>
+    </div>
+
+    <!-- 7. WIDGET PLAYLIST YOUTUBE -->
+    <div class="widget-card" style="text-align: center; padding: 22px 20px; background: linear-gradient(135deg, #ffffff, #fff0f5); border: 2px solid #ff69b4; box-shadow: 0 10px 25px rgba(255, 105, 180, 0.15);">
+        <div style="margin-bottom: 10px;">
+            <span style="font-size: 28px;">🎵🎧</span>
+            <h3 style="font-size: 18px; color: #d81b60; margin: 8px 0 4px 0; font-weight: bold;">Playlist Perjalanan Kita</h3>
+            <p style="font-size: 13px; color: #666; margin: 0 0 16px 0;">Lagu-lagu favorit kita buat nemenin perjalanan di jalan! 🛵🎶</p>
+        </div>
+        <a href="https://youtube.com/playlist?list=PLTciCZIgAPP8&si=Ijf4nSAExJCYYKtO" target="_blank" style="display: inline-block; padding: 12px 24px; background: linear-gradient(135deg, #ff69b4, #ff1493); color: white; font-weight: bold; font-size: 14px; text-decoration: none; border-radius: 50px; box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);">
+            ▶️ Putar Playlist YouTube
+        </a>
+        <p style="font-size: 11px; color: #888; margin-top: 14px; margin-bottom: 0; font-style: italic;">Dengerin bareng-bareng pas lagi touring ya! 💖✨</p>
+    </div>
+    
+    <div class="footer-tip">
+        Tip: Ketuk pada baris kegiatan untuk menandai/menceklis jadwal yang <b>sudah selesai dilaksanakan</b>.<br>
+        © 2026 Sawarna Road Trip With Yovan
+    </div>
+
+    <!-- ⚙️ SCRIPT AUTO-SAVE CHECKBOX, COUNTDOWN TIMER, & TOGGLE DARK MODE -->
+    <script>
+        // 1. MEMORI CHECKBOX OTOMATIS
+        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            if (localStorage.getItem(checkbox.id) === 'true') {
+                checkbox.checked = true;
+            }
+            checkbox.addEventListener('change', () => {
+                localStorage.setItem(checkbox.id, checkbox.checked);
+            });
+        });
+
+        // 2. LOGIKA COUNTDOWN TIMER (HARI, JAM, MENIT, DETIK)
+        const targetDate = new Date("August 10, 2026 05:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById("days").innerText = days;
+                document.getElementById("hours").innerText = hours;
+                document.getElementById("minutes").innerText = minutes;
+                document.getElementById("seconds").innerText = seconds;
+            } else {
+                document.getElementById("days").innerText = 0;
+                document.getElementById("hours").innerText = 0;
+                document.getElementById("minutes").innerText = 0;
+                document.getElementById("seconds").innerText = 0;
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // 3. LOGIKA TOGGLE DARK MODE
+        function toggleTheme() {
+            document.body.classList.toggle("dark-mode");
+            const btn = document.getElementById("themeToggleBtn");
+            if (document.body.classList.contains("dark-mode")) {
+                btn.innerHTML = "☀️ Mode Terang Pink";
+            } else {
+                btn.innerHTML = "🌙 Mode Malam Pink";
+            }
+        }
+    </script>
+</body>
+</html>
