@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sawarna Road Trip Guide</title>
-    <!-- ✅ PINDAHKAN SCRIPT CONFETTI KE SINI (Di luar <style>) -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         
         * {
@@ -893,49 +891,6 @@
         audio.onended = function() {
             playBtn.innerHTML = "▶";
             soundWave.classList.remove("playing");
-        <!-- ⬇️ LETAKKAN KODE JAVASCRIPT KAMU DI SINI ⬇️ -->
-    <script>
-        // ... (kode JavaScript lainnya seperti Countdown atau Confetti) ...
-
-        function toggleAudio() {
-            if (audio.paused) {
-                audio.play();
-                playBtn.innerHTML = "❚❚";
-                soundWave.classList.add("playing");
-            } else {
-                audio.pause();
-                playBtn.innerHTML = "▶";
-                soundWave.classList.remove("playing");
-            }
-        }
-
-        audio.onended = function() {
-            playBtn.innerHTML = "▶";
-            soundWave.classList.remove("playing");
-             }
-        }
-        <!-- 1. Script Confetti (ditambah 'defer' agar di-download tanpa mengganggu proses loading) -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js" defer></script>
-
-    <!-- 2. Script Audio (dibungkus event listener agar nunggu HTML selesai dimuat) -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const audio = document.getElementById("myAudio");
-            const playBtn = document.getElementById("playBtn");
-            const soundWave = document.querySelector(".sound-wave");
-
-            window.toggleAudio = function() {
-                if (audio.paused) {
-                    audio.play();
-                    playBtn.innerHTML = "❚❚";
-                    soundWave.classList.add("playing");
-                } else {
-                    audio.pause();
-                    playBtn.innerHTML = "▶";
-                    soundWave.classList.remove("playing");
-                }
-            };
-        });
         };
     </script>
 </body>
